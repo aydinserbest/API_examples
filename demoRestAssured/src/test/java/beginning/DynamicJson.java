@@ -26,4 +26,5 @@ public class DynamicJson {
     public Object [][] getData(){
         return new Object[][]{{"aaaaaa","111"},{"bbbbbbb", "222"},{"cccccc", "333"}};
     }
+    //parameterize the API test with multiple data set
 }
