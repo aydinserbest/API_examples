@@ -21,8 +21,6 @@ public class Basics {
                 .header("server", "Apache/2.4.52 (Ubuntu)").extract().response().asString();
 
         System.out.println(response);
-
-
     }
     /*
     in the context of the RestAssured code, the extract().response().asString();
@@ -66,5 +64,65 @@ public class Basics {
     Thus, even if you remove the assertThat() statements, the content of the response will not change.
     The only difference is that the validation check for the response to meet certain conditions is removed,
     and any errors that occur will not be thrown during the test.
+     */
+
+    /*
+    RestAssured ile API testi yaparken,
+    given(), when(), then() metodlarının kullanımı
+    BDD (Behavior Driven Development) stilini yansıtır ve okunabilirliği artırır.
+    Ancak, bu metodlar her zaman zorunlu değildir;
+    özellikle when() metodunun kullanımı bazen atlanabilir.
+    Bu, RestAssured'ın esnek bir kütüphane olmasından kaynaklanır
+    ve metod çağrılarını senaryonun gerekliliklerine göre uyarlayabilmenize olanak tanır.
+
+    when() Metodunun Kullanımı
+    BDD yaklaşımında, given() metodunun ardından gelen when() metodu,
+    bir eylemin gerçekleştirildiği adımı ifade eder (örneğin, bir HTTP isteği göndermek).
+    then() metodu ise bu eylemin sonucunun nasıl değerlendirileceğini tanımlar.
+
+    when() Metodu Olmadan
+    RestAssured,
+    when() metodunu kullanmadan doğrudan post(), get(), put(), delete() gibi HTTP metodlarını çağırmanıza izin verir.
+    Bu durumda, HTTP metod çağrısı, when() metodunun yerini alır ve testin anlaşılabilirliğini azaltmadan
+    kodu biraz daha kısa hale getirir.
+
+    Örneklerinizdeki Fark
+    Her iki örneğiniz de geçerlidir ve RestAssured ile API testi yaparken kullanılabilir.
+    Temel fark, when() metodunun kullanılıp kullanılmamasıdır:
+
+    when() Metodu Olmadan:
+
+String response = given().log().all().queryParam("key","qaclick123")
+                .header("Content-Type", "application/json")
+                .body(Payload.addPlace()).post("maps/api/place/add/json")
+                .then().assertThat().statusCode(200).body("scope", equalTo("APP"))
+                .header("server", "Apache/2.4.52 (Ubuntu)").extract().response().asString();
+
+    Bu kod parçası, given() ile başlayıp doğrudan post() metodunu çağırıyor. Bu kullanım geçerlidir ve yaygındır.
+
+    when() Metodu İle:
+
+String response = given().log().all().queryParam("key","qaclick123")
+                .header("Content-Type", "application/json")
+                .body(Payload.addPlace()).when().post("maps/api/place/add/json")
+                .then().assertThat().statusCode(200).body("scope", equalTo("APP"))
+                .header("server", "Apache/2.4.52 (Ubuntu)").extract().response().asString();
+
+    Bu kod parçası,
+    BDD stilinde when() metodunu kullanıyor. Bu kullanım, testin okunabilirliğini ve anlamını artırır,
+    özellikle BDD yaklaşımını benimseyen ekipler için tercih edilir.
+
+    Sonuç
+    Her iki yaklaşım da RestAssured ile API testleri yazmak için geçerlidir.
+    Tercihiniz, kişisel veya takımınızın tercihlerine, okunabilirlik
+    ve tutarlılık gereksinimlerinize bağlı olarak değişebilir.
+    when() metodunun kullanımı zorunlu değildir,
+    ancak BDD stilini ve senaryoların açıkça ifade edilmesini tercih ediyorsanız, kullanılması önerilir.
+
+
+
+
+
+
      */
 }
