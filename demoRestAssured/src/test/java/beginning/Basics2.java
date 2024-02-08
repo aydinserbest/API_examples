@@ -18,6 +18,14 @@ public class Basics2 {
                 .then().assertThat().statusCode(200).body("scope", equalTo("APP"))
                 .header("server", "Apache/2.4.52 (Ubuntu)").extract().response().asString();
 
+        /*
+        given().log().all().queryParam
+        yerine
+        given().queryParam("key","qaclick123").header("Content-Type", "application/json")
+                .body(Payload.addPlace()).log().all()
+                seklinde sona da yazilabilir log()
+         */
+
         System.out.println(response);
         //JsonPath takes String and converts it to JSON
         //and it will help to parse json
