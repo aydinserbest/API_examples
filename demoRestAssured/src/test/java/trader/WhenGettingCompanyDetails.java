@@ -25,6 +25,14 @@ public class WhenGettingCompanyDetails {
                 .asString();
         System.out.println(response);
     }
+    @Test
+    public void test5(){
+        RestAssured.baseURI = "http://localhost:9000/api";
+        String response = given().pathParams("stokid", "aapl")
+                .when().get("/stock/{stokid}/company")
+                .asString();
+        System.out.println(response);
+    }
     /*
     given-when-then john videolardan al yaz
      */
