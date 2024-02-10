@@ -45,4 +45,10 @@ public class Excersise1 {
                 .then()
                 .body("symbol", hasItems("PIN","PINE","TRS"));
     }
+    @Test
+    public void checkListCondition(){
+        when().get("/tops/last")
+                .then()
+                .body("price", hasItems(greaterThan("100.0f")));
+    }
 }
