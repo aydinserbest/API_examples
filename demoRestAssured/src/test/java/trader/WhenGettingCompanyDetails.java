@@ -4,6 +4,8 @@ import io.restassured.RestAssured;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.when;
+import static org.hamcrest.Matchers.hasItems;
 
 public class WhenGettingCompanyDetails {
     @Test
@@ -25,6 +27,16 @@ public class WhenGettingCompanyDetails {
                 .asString();
         System.out.println(response);
     }
+    @Test
+    public void retrieveList(){
+        when().get("/tops/last")
+                .then()
+                .body("symbol", hasItems("PIN","PINE","TRS"));
+    }
+    /*
+        DIREK when().get(...) ile de teste baslanabilir,
+        parametre gondermiceksek mesela
+     */
     @Test
     public void test5(){
         RestAssured.baseURI = "http://localhost:9000/api";
@@ -109,4 +121,6 @@ public class WhenGettingCompanyDetails {
     as part of CI/CD (Continuous Integration/Continuous Deployment) processes,
     helps develop strategies for testing applications both in local and remote environments.
      */
+
+
 }
