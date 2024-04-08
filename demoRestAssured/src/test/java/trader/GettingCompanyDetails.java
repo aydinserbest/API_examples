@@ -41,4 +41,6 @@ public class GettingCompanyDetails {
                 .body("sector", equalTo("Electronic Technology")).extract().response().asString();
         System.out.println(response);
     }
+    //String response = given().log().all().get("/stock/aapl/company")
+    //                .then().extract().response().asString();
 }
